@@ -1,18 +1,67 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>个人主页右部</title>
+<title>jQuery相册图片</title>
+
+<link rel="stylesheet" type="text/css" href="style1.css" />
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){   
+		  
+	var interval;
+	$(".container img").click(function cover(){
+			$(this).addClass("zoom").fadeOut(700,append);		
+			function append(){
+			$(this).removeClass("zoom").appendTo(".container").show();
+			var name = $(".container").children("img").first().attr("alt");
+			 $(".name p").text("No "+name);
+			}	
+	  
+	})
 	
-	<link href="style.css" rel="stylesheet"  type="text/css" />
+	function auto(){
+			var play = $(".container").children("img").first();
+			play.addClass("zoom").fadeOut(700,append);		
+			function append(){
+			$(this).removeClass("zoom").appendTo(".container").show();
+			var name = $(this).parent().children("img").first().attr("alt");
+			 $(".name p").text("No "+name);
+			}
+			interval = setTimeout(auto,5000);
+	}
+	
+	$(".container img").hover(function(){
+			stopPlay();
+	},function(){
+			interval = setTimeout(auto,5000);
+	})
+	
+	function stopPlay(){
+		clearTimeout(interval)
+	}
+	auto();
+					
+})
+</script>
+
 </head>
-	
 <body>
-	<div id="content">
-		<section>
-			欢迎来到我的主页！
-    </section>
-	</div>
+
+<div class="container" style="margin-top:100px"> 
+  <img src="a2.jpg" alt="1" /> 
+  <img src="a3.jpg" alt="2" /> 
+  <img src="a4.jpg" alt="3" /> 
+  <img src="a5.jpg" alt="4" /> 
+  <img src="a6.jpg" alt="5" />
+	<img src="a7.jpg" alt="6" />
+	<img src="a8.jpg" alt="7" />
 	
+</div>
+<div class="name">
+<p>No 1</p>
+</div>
+
 </body>
 </html>
